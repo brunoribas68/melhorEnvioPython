@@ -1,6 +1,5 @@
 import pandas as pd
-
-
+import os
 # import connection as conn
 
 
@@ -34,16 +33,24 @@ def arrumaJson(data_frame):
 def RelatorioConsumidor(new_data_frame):
     relatorio_por_consumidor = pd.DataFrame()
     ## organizar por consumidor
-    relatorio_por_consumidor = new_data_frame['lantencies'].sort_values(by='customer_id')
-    relatorio_por_consumidor.to_csv('relatorio_por_consumidor.csv', sep=";")
+    relatorio_por_consumidor = new_data_frame['lantencies'].groupby(by='customer_id')
+    csv = {}
+    os.makedirs('customers', exist_ok=True)
+    for customer, dados in relatorio_por_consumidor:
+        csv[customer] = dados
+        csv[customer].to_csv(f"./customers/{customer}.csv", sep=";")
     return relatorio_por_consumidor
 
 
 def RelatorioServico(new_data_frame):
     relatorio_por_servico = pd.DataFrame()
     ## organizar por serviço
-    relatorio_por_servico = new_data_frame['lantencies'].sort_values(['service'])
-    relatorio_por_consumidor.to_csv('relatorio_por_servico.csv', sep=";")
+    relatorio_por_servico = new_data_frame['lantencies'].groupby(by='service')
+    csv = {}
+    os.makedirs('services', exist_ok=True)
+    for services, dados in relatorio_por_servico:
+        csv[services] = dados
+        csv[services].to_csv(f"./services/{services}.csv", sep=";")
     return relatorio_por_servico
 
 
@@ -51,9 +58,8 @@ def RelatorioMediaLatencia(new_data_frame):
     relatorio_medias_consumidor = pd.DataFrame()
     ## organizar pelo consumidor com as médias
     relatorio_medias_consumidor = new_data_frame['lantencies'].groupby('customer_id').mean()
-    relatorio_por_consumidor.to_csv('relatorio_medias_consumidor.csv', sep=";")
+    relatorio_medias_consumidor.to_csv('relatorio_medias_consumidor.csv', sep=';')
     return relatorio_medias_consumidor
-
 
 if __name__ == '__main__':
     # connection = conn.Connection.create_server_connection()
