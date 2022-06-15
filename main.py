@@ -22,7 +22,8 @@ def arrumaJson(data_frame):
     }
 
     ## organizando o lantencia pois ele que usaremos para os relatorios
-    new_data_frame['lantencies']['service'] = new_data_frame['service'].id
+    new_data_frame['lantencies']['service_id'] = new_data_frame['service'].id
+    new_data_frame['lantencies']['service'] = new_data_frame['service'].name
     new_data_frame['lantencies']['customer_id'] = new_data_frame['authenticated_entity']
     new_data_frame['lantencies']['client_ip'] = new_data_frame['client_ip']
     new_data_frame['lantencies']['route'] = new_data_frame['route'].id
