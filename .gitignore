@@ -1,5 +1,7 @@
 *.csv
 *.idea
+.ipynb_checkpoints
+melhorEnvioJupyter.ipynb
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
