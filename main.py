@@ -2,7 +2,6 @@ from dotenv import load_dotenv
 from database import BancoDeDados
 from data import Data
 from relatorios import Relatorios
-from typing import Union, Any, Dict, SupportsIndex
 
 if __name__ == '__main__':
     load_dotenv()

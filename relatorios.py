@@ -22,12 +22,15 @@ class Relatorios:
         os.makedirs('services', exist_ok=True)
         for services, dados in relatorio_por_servico:
             csv[services] = dados
-            csv[services].to_csv(f"./services/{dados.iloc[0]['service']}.csv", sep=";")
+            csv[services].to_csv(f"./services/{dados.iloc[0]['service']}.csv",
+                                 sep=";")
         return relatorio_por_servico
 
     @staticmethod
     def RelatorioMediaLatencia(latencies: pd.DataFrame):
         # organizar pelo consumidor com as médias
-        relatorio_medias_consumidor = latencies.groupby('consumer_id').mean()
-        relatorio_medias_consumidor.to_csv('relatorio_medias_consumidor.csv', sep=';')
+        relatorio_medias_consumidor = latencies.groupby('consumer_id')\
+                                                .mean()
+        relatorio_medias_consumidor.to_csv('relatorio_medias_consumidor.csv',
+                                           sep=';')
         return relatorio_medias_consumidor
